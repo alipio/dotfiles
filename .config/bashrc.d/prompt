@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+## Prompt
+
+_bash_prompt_config() {
+  local user_symbol="\u"
+  local host_symbol="\h"
+  local esc_open="\["
+  local esc_close="\]"
+
+  if tput setaf >/dev/null 2>&1; then
+    _setaf () { tput setaf "$1"; }
+    local reset="${esc_open}$( { tput sgr0 || tput me; } 2>/dev/null )${esc_close}"
+    local bold="$( { tput bold || tput md; } 2>/dev/null )"
+  else
+    # Fallback
+    _setaf () { echo "\033[0;$(($1+30))m"; }
+    local reset="\033[m"
+    local bold=""
+    esc_open=""
+    esc_close=""
+  fi
+
+  # Normal colors
+  local black="${esc_open}$(_setaf 0)${esc_close}"
+  local red="${esc_open}$(_setaf 1)${esc_close}"
+  local green="${esc_open}$(_setaf 2)${esc_close}"
+  local yellow="${esc_open}$(_setaf 3)${esc_close}"
+  local blue="${esc_open}$(_setaf 4)${esc_close}"
+  local violet="${esc_open}$(_setaf 5)${esc_close}"
+  local cyan="${esc_open}$(_setaf 6)${esc_close}"
+  local white="${esc_open}$(_setaf 7)${esc_close}"
+
+  # bright colors
+  local bright_green="${esc_open}$(_setaf 10)${esc_close}"
+  local bright_yellow="${esc_open}$(_setaf 11)${esc_close}"
+  local bright_blue="${esc_open}$(_setaf 12)${esc_close}"
+  local bright_violet="${esc_open}$(_setaf 13)${esc_close}"
+  local bright_cyan="${esc_open}$(_setaf 14)${esc_close}"
+  local bright_white="${esc_open}$(_setaf 15)${esc_close}"
+
+  # Bold colors
+  local black_bold="${esc_open}${bold}$(_setaf 0)${esc_close}"
+  local red_bold="${esc_open}${bold}$(_setaf 1)${esc_close}"
+  local green_bold="${esc_open}${bold}$(_setaf 2)${esc_close}"
+  local yellow_bold="${esc_open}${bold}$(_setaf 3)${esc_close}"
+  local blue_bold="${esc_open}${bold}$(_setaf 4)${esc_close}"
+  local violet_bold="${esc_open}${bold}$(_setaf 5)${esc_close}"
+  local cyan_bold="${esc_open}${bold}$(_setaf 6)${esc_close}"
+  local white_bold="${esc_open}${bold}$(_setaf 7)${esc_close}"
+
+  # Expose the variables we need in prompt command
+  p_user=${bright_green}${user_symbol}
+  p_host=${cyan}${host_symbol}
+  p_white=${white}
+  p_green=${green}
+  p_yellow=${yellow}
+  p_red=${red}
+  p_reset=${reset}
+}
+
+bash_prompt_command() {
+  local last_exit_status=$?
+  local p_pwd=${PWD/#$HOME/\~}
+
+  # Update terminal title
+  if [[ $TERM == xterm* ]]; then
+    echo -ne "\033]0;${p_pwd}\007"
+  fi
+
+  # Parse Git branch name
+  p_git=$(__git_ps1 " ${p_reset}on ${p_white}[${p_green}%s${p_white}]${p_reset}")
+
+  local symbol_color=${p_yellow}
+  [ "$last_exit_status" -ne 0 ] && symbol_color=${p_red}
+
+  if [ "$SSH_CONNECTION" ]; then
+    PS1="${p_user}${p_white}@${p_host} ${p_yellow}${p_pwd}${p_git}\n${symbol_color}❯ ${p_reset}"
+  else
+    PS1="${p_yellow}${p_pwd}${p_git}\n${symbol_color}❯ ${p_reset}"
+  fi
+}
+
+_bash_prompt_config
+unset _bash_prompt_config
+
+PROMPT_COMMAND=bash_prompt_command

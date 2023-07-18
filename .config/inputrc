@@ -1,0 +1,55 @@
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# Allow iso-latin1 characters to be inserted rather
+# than converted to prefix-meta sequences
+set convert-meta off
+
+# Don't strip characters to 7 bits when reading
+set input-meta on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# Display the common prefix choices on the first completion then cycle the
+# available choices on the next completion.
+set menu-complete-display-prefix on
+
+# Display characters with the eighth bit set directly rather than as
+# meta-prefixed characters
+set output-meta on
+
+# # Turn off the completions pager.
+set page-completions off
+
+# Immediately display completion matches for ambiguous patterns.
+set show-all-if-ambiguous on
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# Edit the current command in $EDITOR and execute.
+"\ee": edit-and-execute-command
+
+# TAB cycles forward through completion choices.
+TAB: menu-complete
+
+# Shift-TAB cycles backward through completion choices.
+"\e[Z": menu-complete-backward
+
+# Filtered history search
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Prepend sudo to the current command.
+"\C-xs": "\C-asudo \C-e"

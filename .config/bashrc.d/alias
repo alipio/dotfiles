@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+# Shortcuts
+alias reload="source ~/.bashrc"
+alias sudo="sudo "
+alias g="git"
+alias v="vim"
+
+# Easier navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias -- -="cd -"
+alias dl="cd ~/dl"
+
+# Default options
+alias rsync="rsync -vh"
+alias psgrep="psgrep -i"
+
+[ -x "$(command -v hub)" ] && eval "$(hub alias -s)" # alias git=hub
+
+# List declared aliases, functions, paths
+alias aliases="alias | sed 's/=.*//'"
+alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
+alias paths='echo -e ${PATH//:/\\n}'
+
+# Directory listing/traversal
+alias ls="ls -F --color=auto --group-directories-first"
+alias ll="ls -hl --time-style=long-iso"
+alias la="ll -A"
+alias lsd="ll | grep --color=never '^d'"
+
+# bundler
+alias be="bundle exec"
+alias bi="bundle install"
+
+# Shorthand Ruby
+alias rb="ruby"
+
+alias gaa='git add --all'
+alias gap='git add --patch'
+alias gb='git branch'
+alias gbc='git checkout -b'
+alias gbd='git branch -d'
+alias gbD='git branch -D'
+alias gbr='git branch -m'
+alias gbR='git branch -M'
+alias gc='git commit -m'
+alias gcm='git checkout master'
+alias gco='git checkout'
+alias gcp='git cherry-pick'
+alias gd='git diff'
+alias gf='git fetch'
+alias gl='git log --pretty=nice --graph --date=short'
+alias gm='git merge --no-ff'
+alias gmt='git mergetool'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gpl='git pull'
+alias gpt='git push --tags'
+alias gra='git rebase --abort'
+alias grb='git rebase'
+alias grc='git rebase --continue'
+alias gri='git rebase -i'
+alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
+alias gst='git status -sb'
+alias gup='git refresh'
+alias gwr='git reset --hard'
+
+# Miscellaneous
+alias hosts="sudo $EDITOR /etc/hosts"
+alias quit="exit"
+alias week="date +%V"
+alias tlf="tail -f"
+alias open='xdg-open 2>/dev/null'

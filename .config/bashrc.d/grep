@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Tell grep to highlight matches
+GREP_OPTIONS+=" --color=auto"
+
+# Avoid VCS folders
+for pattern in .cvs .git .hg .svn; do
+  GREP_OPTIONS+=" --exclude-dir=$pattern"
+done
+unset pattern
+
+alias grep="grep $GREP_OPTIONS"
+export GREP_COLORS='mt=1;32'

@@ -1,0 +1,20 @@
+--recurse
+--exclude=vendor/*
+--exclude=node_modules/*
+--exclude=db/*
+--exclude=log/*
+--exclude=public/*
+--exclude=tmp/*
+--exclude=*.css
+--exclude=*.json
+--exclude=spec/*_spec.rb
+--languages=-html,sql
+
+--langmap=ruby:+.rake
+--regex-ruby=/^[ \t]*([A-Z][[:alnum:]_]+) *=/\1/C,constant/
+--regex-ruby=/^[ \t]*scope *:([[:alnum:]_]+)/\1/f,method,ActiveRecord scope/
+--regex-ruby=/^[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many|has_many_attached|has_one_attached) *:([[:alnum:]_]+)/\2/f,method,ActiveRecord association/
+--regex-ruby=/^[ \t]*event *:([[:alnum:]_]+)/\1/f,method,aasm_event/
+--regex-ruby=/^[ \t]*event *:([[:alnum:]_]+)/\1!/f,method,aasm_event/
+--regex-ruby=/^[ \t]*event *:([[:alnum:]_]+)/\1?/f,method,aasm_event/
+--regex-ruby=/^[ \t]*alias_method *:([^, \t]+)/\1/f,method,aliased method/

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This script is called on startup to remap keys.
+xset r rate 220 60
+
+xkbdir="$XDG_CONFIG_HOME/xsession/xkb"
+xkbmapfile="$xkbdir/keymaps/$(hostname --fqdn)"
+[ -r "$xkbmapfile" ] || xkbmapfile="${xkbmapfile%/*}/default"
+xkbcomp -I"$xkbdir" "$xkbmapfile" "${DISPLAY%%.*}" 2>/dev/null

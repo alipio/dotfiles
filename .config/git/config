@@ -1,0 +1,124 @@
+[user]
+  name = Alipio de Paula
+  email = alipiodepaula@gmail.com
+
+[alias]
+  unstage = reset HEAD --
+  discard = checkout --
+  pristine = !git reset --hard HEAD && git clean -df
+  amend = !git commit --amend -v --date="$(date +%Y-%m-%dT%H:%M:%S)"
+  recommit = commit --amend --no-edit
+  tags = tag --sort=creatordate --format '%(creatordate:short) %(HEAD)%(align:width=48)%(refname:short)%(end) → %(upstream:track)%(subject)'
+  branches = branch --sort=creatordate --format \
+    '%(creatordate:short) %(HEAD)%(align:width=48)%(refname:short)%(end) → %(upstream:track)%(subject)'
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  back = checkout -
+  patch = !git --no-pager diff --no-color
+  review-unpushed = log --oneline --color @{u}..
+  cleanup = !git remote prune origin && git gc && git clean -d -f && git stash clear
+  pick = cherry-pick
+  undo = reset --soft HEAD~1
+  workon = !git create-branch
+  refresh = pull --rebase origin HEAD
+  aliases = !git config --get-regexp "^alias\\." | sed -e "s/^alias\\.//" -e "s/\\ /\\:\\ /"
+
+[core]
+  autocrlf = input
+
+  # Speed up commands involving untracked files such as `git status`.
+  # https://git-scm.com/docs/git-update-index#_untracked_cache
+  untrackedCache = true
+
+  # Good-lookin' diffs
+  pager = diff-so-fancy | less --tabs=4 -RFX
+
+  whitespace = -trailing-space
+
+[init]
+  defaultBranch = master
+
+[diff]
+  compactionHeuristic = true
+
+  # Use better, descriptive initials (c, i, w) instead of a/b.
+  mnemonicPrefix = true
+
+  # Show renames/moves as such
+  renames = true
+
+[format]
+  pretty = tformat:%Cred%h%Creset %s %Cgreen(%an, %ad)%Creset
+
+[log]
+  date = iso
+  abbrevCommit = true
+
+[color]
+  # Use colors in Git commands that are capable of colored output when
+  # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
+[color "diff"]
+  meta = 11
+  frag = magenta bold # line info
+  func = 146 bold
+  commit = yellow bold
+  old = red bold # deletions
+  new = green bold # additions
+  whitespace = red reverse
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[help]
+  # Automatically correct and execute mistyped commands
+  autoCorrect = 10
+
+[fetch]
+  prune = true
+
+[pull]
+  rebase = merges
+
+[push]
+  # https://git-scm.com/docs/git-config#git-config-pushdefault
+  default = current
+
+  # When pushing, also push tags whose commit-ishs are now reachable upstream
+  followTags = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+
+[merge]
+  tool = vimdiff
+
+[mergetool]
+  keepBackup = false
+  prompt = false
+
+[branch]
+  autoSetupRebase = always
+
+[status]
+  short = true
+  branch = true
+
+[rerere]
+  enabled = true
+
+# vim:set ft=gitconfig:

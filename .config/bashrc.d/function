@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+take() {
+  if [[ $1 =~ ^([A-Za-z0-9]\+@|https?|git|ssh|ftps?|rsync).*\.git/?$ ]]; then
+    takegit "$1"
+  else
+    takedir "$@"
+  fi
+}
+
+takedir() {
+  mkdir -p "$@" && cd "$@"
+}
+
+takegit() {
+  git clone "$1"
+  cd "$(basename ${1%%.git})"
+}
+
+fco() {
+  local tags branches target
+  branches=$(
+    git --no-pager branch --all \
+      --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
+    | sed '/^$/d') || return
+  tags=$(
+    git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$branches"; echo "$tags") |
+    fzf --no-hscroll --no-multi -n 2 \
+        --ansi) || return
+  git checkout $(awk '{print $2}' <<<"$target" )
+}
+
+# Show disk usage of current folder, or list with depth
+duf() {
+  du --max-depth=${1:-0} -h | sort -rh
+}
+
+# Get named var (usage: get "VAR_NAME")
+get() {
+  echo "${!1}"
+}
+
+# Add to path
+prepend-path() {
+  [ -d $1 ] && PATH="$1:$PATH"
+}
+
+uuid() {
+  uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | tee >(xclip -sel clip); printf "\n"
+}
+
+# start quick python server and open webpage, passing optional port
+serve() {
+  local port=${1:-8888}
+  sleep 1 && xdg-open "http://localhost:$port"
+  python -m SimpleHTTPServer "$port";
+}
+
+# Open a bundled gem in vim
+gem_edit() {
+  $EDITOR $(bundle show $1)
+}
+
+# git-foresta
+function gifo() {
+  git-foresta --style=10 "$@" | less -RSX
+}
+
+function gifa() {
+  git-foresta --all --style=10 "$@" | less -RSX
+}

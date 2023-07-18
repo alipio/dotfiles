@@ -1,0 +1,16 @@
+begin
+  require 'awesome_print'
+  AwesomePrint.irb!
+rescue LoadError
+  puts "Couldn't load awesome_print"
+end
+
+IRB.conf[:HISTORY_FILE] = File.expand_path('~/.cache/irb_history')
+IRB.conf[:USE_AUTOCOMPLETE] = false
+
+def clipcopy(data)
+  IO.popen('xclip -sel clipboard', 'w') { |io| io << data.to_s }
+  $?.success?
+end
+
+puts "Ruby #{RUBY_VERSION} (#{RUBY_RELEASE_DATE} patchlevel #{RUBY_PATCHLEVEL})"

@@ -1,0 +1,4 @@
+feh \
+  --scale-down \
+  --auto-rotate \
+  --action1 ';[copy path]echo %F | xclip -selection clipboard'

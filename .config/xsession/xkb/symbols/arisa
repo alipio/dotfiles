@@ -1,0 +1,132 @@
+default partial alphanumeric_keys modifier_keys
+xkb_symbols "basic" {
+    name[Group1] = "English (ARISA)";
+
+    key.type[Group1] = "ONE_LEVEL";
+
+    key <LSGT> { [ ISO_Level5_Shift ] };
+    modifier_map Mod3 { <LSGT> };
+
+    // key <MENU> { [ Super_R ] };
+    key <AB11> { [ Super_R ] };
+    modifier_map Mod4 { Super_R };
+
+    // Main keys
+    // Order of mods (defined by EIGHT_LEVEL_SEMIALPHABETIC) is:
+    // [ None, Shift, Sym, Shift+Sym, Num, Shift+Num, Sym+Num, Shift+Sym+Num ]
+    key.type[Group1] = "EIGHT_LEVEL_SEMIALPHABETIC";
+
+    // Second row
+    key <AD01> { [ q, Q, quotedbl, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD02> { symbols[Group1] = [ w, W, underscore, NoSymbol,
+                    KP_7, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP7>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AD03> { symbols[Group1] = [ e, E, bracketleft, NoSymbol,
+                    KP_8, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP8>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AD04> { symbols[Group1] = [ r, R, bracketright, NoSymbol,
+                    KP_9, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP9>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AD05> { [ t, T, asciicircum, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD06> { [ y, Y, exclam, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD07> { [ u, U, less, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD08> { [ i, I, greater, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD09> { [ o, O, equal, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD10> { symbols[Group1] = [ p, P, ampersand, NoSymbol,
+                    Print, Print, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<PRSC>), Redirect(key=<PRSC>), NoAction(), NoAction() ] };
+    key <AD11> { symbols[Group1] = [ bracketleft, braceleft, dead_acute, dead_grave,
+                    Home, Home, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<HOME>), Redirect(key=<HOME>), NoAction(), NoAction() ] };
+    key <AD12> { symbols[Group1] = [ bracketright, braceright, NoSymbol, NoSymbol,
+                    End, End, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<END>), Redirect(key=<END>), NoAction(), NoAction() ] };
+
+    // Home row
+    key <AC01> { symbols[Group1] = [ a, A, slash, NoSymbol,
+                    Shift_L, Shift_L, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    SetMods(mods=Shift), SetMods(mods=Shift), NoAction(), NoAction() ] };
+    key <AC02> { symbols[Group1] = [ s, S, minus, NoSymbol,
+                    KP_4, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP4>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AC03> { symbols[Group1] = [ d, D, braceleft, NoSymbol,
+                    KP_5, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP5>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AC04> { symbols[Group1] = [ f, F, braceright, NoSymbol,
+                    KP_6, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP6>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AC05> { symbols[Group1] = [ g, G, asterisk, NoSymbol,
+                    KP_Decimal, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KPDL>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AC06> { symbols[Group1] = [ h, H, question, NoSymbol,
+                    Left, Left, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<LEFT>), Redirect(key=<LEFT>), NoAction(), NoAction() ] };
+    key <AC07> { symbols[Group1] = [ j, J, parenleft, NoSymbol,
+                    Down, Down, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<DOWN>), Redirect(key=<DOWN>), NoAction(), NoAction() ] };
+    key <AC08> { symbols[Group1] = [ k, K, parenright, NoSymbol,
+                    Up, Up, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<UP>), Redirect(key=<UP>), NoAction(), NoAction() ] };
+    key <AC09> { symbols[Group1] = [ l, L, apostrophe, NoSymbol,
+                    Right, Right, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<RGHT>), Redirect(key=<RGHT>), NoAction(), NoAction() ] };
+    key <AC10> { symbols[Group1] = [ colon, semicolon, ccedilla, Ccedilla,
+                    Prior, Prior, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<PGUP>), Redirect(key=<PGUP>), NoAction(), NoAction() ] };
+    key <AC11> { symbols[Group1] = [ apostrophe, quotedbl, dead_tilde, dead_circumflex,
+                    Next, Next, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<PGDN>), Redirect(key=<PGDN>), NoAction(), NoAction() ] };
+    key <AC12> { [ backslash, bar, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    // Bottom row
+    key <AB01> { symbols[Group1] = [ z, Z, numbersign, NoSymbol,
+                    KP_0, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP0>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AB02> { symbols[Group1] = [ x, X, dollar, NoSymbol,
+                    KP_1, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP1>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AB03> { symbols[Group1] = [ c, C, bar, NoSymbol,
+                    KP_2, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP2>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AB04> { symbols[Group1] = [ v, V, asciitilde, NoSymbol,
+                    KP_3, NoSymbol, NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<KP3>, clearMods=LevelFive), NoAction(), NoAction(), NoAction() ] };
+    key <AB05> { [ b, B, grave, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB06> { [ n, N, plus, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB07> { [ m, M, percent, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB08> { [ comma, less, backslash, NoSymbol, NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB09> { symbols[Group1] = [ period, greater, at, NoSymbol,
+                    Insert, Insert,
+                    NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<INS>, clearMods=LevelFive), Redirect(key=<INS>, clearMods=LevelFive),
+                    NoAction(), NoAction() ] };
+    key <AB10> { symbols[Group1] = [ slash, question, semicolon, NoSymbol,
+                    BackSpace, BackSpace,
+                    NoSymbol, NoSymbol ],
+                 actions[Group1] = [ NoAction(), NoAction(), NoAction(), NoAction(),
+                    Redirect(key=<DELE>, clearMods=LevelFive), Redirect(key=<DELE>, clearMods=LevelFive),
+                    NoAction(), NoAction() ] };
+};
+// vim:set sw=4 ft=xkb:

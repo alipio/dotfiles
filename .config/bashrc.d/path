@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Prepend new items to path (if directory exists)
+prepend-path "$HOME/.local/bin:$PATH"
+
+# Remove duplicates (preserving prepended items)
+# Source: http://unix.stackexchange.com/a/40755
+PATH=`echo -n $PATH | awk -v RS=: '!a[$0]++ { if (NR > 1) printf(":"); printf("%s", $0) }'`
+
+# Wrap up
+export PATH
